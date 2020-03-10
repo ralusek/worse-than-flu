@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import _ from 'lodash';
-
+import ReactPlayer from 'react-player'
 
 // Children
 
@@ -56,7 +56,10 @@ function RootView({
       <br />
       <input value={fixedInterpersonalInteractions} onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))} />
     </div>
-    
+    <ReactPlayer
+      url='https://www.youtube.com/watch?v=eejhwa-OzEo'
+    />
+
     <AreaChart
       width={1200}
       height={600}
