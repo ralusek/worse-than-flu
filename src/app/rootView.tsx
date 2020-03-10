@@ -18,6 +18,8 @@ type Props = {
   languageRef: any;
   simulatedDays: SimulatedDay[];
   daysToSimulate: number;
+  chartDimensions: { height: number, width: number },
+  youtubeVideoDimensions: { height: string, width: string },
   setDaysToSimulate: (daysToSimulate: number) => void;
   fixedProbabilityOfSpread: number;
   setFixedProbabilityOfSpread: (fixedProbabilityOfSpread: number) => void;
@@ -33,6 +35,8 @@ function RootView({
   languageRef,
   simulatedDays,
   daysToSimulate,
+  chartDimensions,
+  youtubeVideoDimensions,
   setDaysToSimulate,
   fixedProbabilityOfSpread,
   setFixedProbabilityOfSpread,
@@ -81,17 +85,14 @@ function RootView({
         <div className='video'>
           <YouTube
             videoId='eejhwa-OzEo'
-            opts={{
-              width: '500',
-              height: '200',
-            }}
+            opts={youtubeVideoDimensions}
           />
         </div>
       </div>
     </div>
     <AreaChart
-      width={1200}
-      height={400}
+      width={chartDimensions.width}
+      height={chartDimensions.height}
       data={simulatedDays}
       syncId="anyId"
       margin={{
@@ -100,7 +101,7 @@ function RootView({
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis />
-      <YAxis dataKey="totalCases" />
+      <YAxis dataKey="totalCases" width={40} />
       <Tooltip />
       {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
       {/* TODO convert the rest of these to i18n */}

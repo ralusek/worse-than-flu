@@ -1,3 +1,5 @@
+$max-width-mobile: 500px;
+
 .RootView {
   display: flex;
   flex: 1 1 100%;
@@ -16,7 +18,7 @@
       font-weight: 500;
       margin-bottom: 30px;
 
-      @media screen and (max-width: 700px) {
+      @media screen and (max-width: $max-width-mobile) {
         font-size: 26px;
         margin-bottom: 15px;
       }
@@ -27,7 +29,7 @@
       flex: 0 1 auto;
       justify-content: space-around;
 
-      @media screen and (max-width: 700px) {
+      @media screen and (max-width: $max-width-mobile) {
         flex-direction: column-reverse;
       }
 
@@ -37,7 +39,7 @@
         flex: 1 1 auto;
         width: 50%;
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: $max-width-mobile) {
           width: 100%;
           margin-bottom: 20px;
         }
@@ -50,7 +52,7 @@
           align-items: center;
           font-size: 22px;
 
-          @media screen and (max-width: 700px) {
+          @media screen and (max-width: $max-width-mobile) {
             font-size: 18px;
             height: max-content;
           }
@@ -68,12 +70,17 @@
           >.value {
             font-size: 22px;
             width: 60px;
-            border-radius: 5px;
-            border: 1px solid green;
             padding: 5px;
             text-align: center;
+            border: 1px solid green;
+            border-radius: 5px;
             outline: none;
-          }
+
+            @media screen and (max-width: $max-width-mobile) {
+              font-size: 18px;
+              padding: 2px;
+            }
+            }
         }
       }
 
@@ -81,7 +88,7 @@
         width: 50%;
         text-align: center;
 
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: $max-width-mobile) {
           width: 100%;
           margin-bottom: 10px;
         }
