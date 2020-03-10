@@ -1,23 +1,24 @@
 import React from 'react';
+import YouTube from 'react-youtube'
+import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import _ from 'lodash';
 
+// Constants
+import { GROWTH_FACTOR } from 'constants/simulatedDayProperties';
 
-// Children
-
+// Utils
+import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
 
 // Styles
 import './rootStyles';
-import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
-import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
-import { GROWTH_FACTOR } from 'constants/simulatedDayProperties';
-
 
 
 type Props = {
   languageRef: any;
   simulatedDays: SimulatedDay[];
   daysToSimulate: number;
+  chartDimensions: { height: number, width: number },
+  youtubeVideoDimensions: { height: string, width: string },
   setDaysToSimulate: (daysToSimulate: number) => void;
   fixedProbabilityOfSpread: number;
   setFixedProbabilityOfSpread: (fixedProbabilityOfSpread: number) => void;
@@ -33,33 +34,61 @@ function RootView({
   languageRef,
   simulatedDays,
   daysToSimulate,
+  chartDimensions,
+  youtubeVideoDimensions,
   setDaysToSimulate,
   fixedProbabilityOfSpread,
   setFixedProbabilityOfSpread,
   fixedInterpersonalInteractions,
   setFixedInterpersonalInteractions,
 }: Props) {
-  return <div style={{marginLeft: 100}}>
-    <h4>This is not the flu, ya dingus.</h4>
-    <div>
-      <label>Days To Simulate</label>
-      <br />
-      <input value={daysToSimulate} onChange={(evt) => setDaysToSimulate(Number(evt.target.value))} />
+  return <div className="RootView">
+    <div className="header">
+      <div className="title">This is not the flu, ya dingus.</div>
+      <div className="controls-container">
+        <div className="controls">
+          <div className="control">
+            <div className="label">
+              Days To Simulate
+            </div>
+            <input
+              className="value"
+              value={daysToSimulate}
+              onChange={(evt) => setDaysToSimulate(Number(evt.target.value))}
+            />
+          </div>
+          <div className="control">
+            <div className="label">
+              Chance of Spreading (1 in)
+            </div>
+            <input
+              className="value"
+              value={fixedProbabilityOfSpread}
+              onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))}
+            />
+          </div>
+          <div className="control">
+            <div className="label">
+              Number of Daily Personal Interactions
+            </div>
+            <input
+              className="value"
+              value={fixedInterpersonalInteractions}
+              onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))}
+            />
+          </div>
+        </div>
+        <div className="video">
+          <YouTube
+            videoId="eejhwa-OzEo"
+            opts={youtubeVideoDimensions}
+          />
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Chance of Spreading</label>
-      <br />
-      1 in <input value={fixedProbabilityOfSpread} onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))} />
-    </div>
-    <div>
-      <label>Number of Daily Personal Interactions</label>
-      <br />
-      <input value={fixedInterpersonalInteractions} onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))} />
-    </div>
-    
     <AreaChart
-      width={1200}
-      height={600}
+      width={chartDimensions.width}
+      height={chartDimensions.height}
       data={simulatedDays}
       syncId="anyId"
       margin={{
@@ -68,7 +97,7 @@ function RootView({
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis />
-      <YAxis dataKey="totalCases" />
+      <YAxis dataKey="totalCases" width={40} />
       <Tooltip />
       {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
       {/* TODO convert the rest of these to i18n */}

@@ -1,9 +1,98 @@
+$max-width-mobile: 500px;
+
 .RootView {
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
-  overflow: hidden;
+  padding: 10px;
+  overflow-y: auto;
 
-  .recharts-wrapper {
+  >.header {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    text-align: center;
+
+    >.title {
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 30px;
+
+      @media screen and (max-width: $max-width-mobile) {
+        font-size: 26px;
+        margin-bottom: 15px;
+      }
+    }
+
+    >.controls-container {
+      display: flex;
+      flex: 0 1 auto;
+      justify-content: space-around;
+
+      @media screen and (max-width: $max-width-mobile) {
+        flex-direction: column-reverse;
+      }
+
+      >.controls {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        width: 50%;
+
+        @media screen and (max-width: $max-width-mobile) {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        >.control {
+          display: flex;
+          flex: 0 1 auto;
+          margin-bottom: 10px;
+          height: 33.3333333333%;
+          align-items: center;
+          font-size: 22px;
+
+          @media screen and (max-width: $max-width-mobile) {
+            font-size: 18px;
+            height: max-content;
+          }
+
+            &:last-of-type {
+            margin-bottom: 0;
+          }
+
+          >.label {
+            text-align: left;
+            width: max-content;
+            margin-right: 7px;
+          }
+
+          >.value {
+            font-size: 22px;
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid green;
+            border-radius: 5px;
+            outline: none;
+
+            @media screen and (max-width: $max-width-mobile) {
+              font-size: 18px;
+              padding: 2px;
+            }
+            }
+        }
+      }
+
+      >.video {
+        width: 50%;
+        text-align: center;
+
+        @media screen and (max-width: $max-width-mobile) {
+          width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+    }
   }
 }
