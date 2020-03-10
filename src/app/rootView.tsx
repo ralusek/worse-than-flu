@@ -58,17 +58,6 @@ function RootView({
           translations[TITLE.ROOT_VIEW].name
         }
       </div>
-      <select value={language} onChange={(e) => setLanguage(e.target.value as Language)}>
-        {
-          LANGUAGES.map((language) => (
-            <option value={language}>
-              {
-                language
-              }
-            </option>
-          ))
-        }
-      </select>
       <div className="controls-container">
         <div className="controls">
           <div className="control">
@@ -116,54 +105,71 @@ function RootView({
         </div>
       </div>
     </div>
-    <AreaChart
-      width={chartDimensions.width}
-      height={chartDimensions.height}
-      data={simulatedDays}
-      syncId="anyId"
-      margin={{
-        top: 10, right: 30, left: 100, bottom: 0,
-      }}
+    <div className='charts'>
+      <AreaChart
+        width={chartDimensions.width}
+        height={chartDimensions.height}
+        data={simulatedDays}
+        syncId="anyId"
+        margin={{
+          top: 10, right: 30, left: 100, bottom: 0,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis />
+        <YAxis dataKey="totalCases" width={40} />
+        <Tooltip />
+        {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
+        <Area
+          type="monotone"
+          dataKey={SIMULATED_DAY_PROPERTY.GROWTH_FACTOR}
+          name={translations[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
+        />
+        <Area
+          type="monotone"
+          dataKey={SIMULATED_DAY_PROPERTY.TOTAL_CASES}
+          name={translations[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
+          stroke="#8884d8"
+          fill="#8884d8"
+        />
+        <Area
+          type="monotone"
+          dataKey={SIMULATED_DAY_PROPERTY.ACTIVE_CASES}
+          name={translations[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
+          stroke="#FF84d8"
+          fill="#FF84d8"
+        />
+        <Area
+          type="monotone"
+          dataKey={SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES}
+          name={translations[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
+          stroke="#FF0000"
+          fill="#FF0000"
+        />
+        <Area
+          type="monotone"
+          dataKey={SIMULATED_DAY_PROPERTY.NEW_CASES}
+          name={translations[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
+          stroke="#88FFd8"
+          fill="#88FFd8"
+        />
+      </AreaChart>
+    </div>
+    <select
+      className='select-language'
+      value={language}
+      onChange={(e) => setLanguage(e.target.value as Language)}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis />
-      <YAxis dataKey="totalCases" width={40} />
-      <Tooltip />
-      {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
-      <Area
-        type="monotone"
-        dataKey={SIMULATED_DAY_PROPERTY.GROWTH_FACTOR}
-        name={translations[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
-      />
-      <Area
-        type="monotone"
-        dataKey={SIMULATED_DAY_PROPERTY.TOTAL_CASES}
-        name={translations[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
-        stroke="#8884d8"
-        fill="#8884d8"
-      />
-      <Area
-        type="monotone"
-        dataKey={SIMULATED_DAY_PROPERTY.ACTIVE_CASES}
-        name={translations[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
-        stroke="#FF84d8"
-        fill="#FF84d8"
-      />
-      <Area
-        type="monotone"
-        dataKey={SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES}
-        name={translations[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
-        stroke="#FF0000"
-        fill="#FF0000"
-      />
-      <Area
-        type="monotone"
-        dataKey={SIMULATED_DAY_PROPERTY.NEW_CASES}
-        name={translations[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
-        stroke="#88FFd8"
-        fill="#88FFd8"
-      />
-    </AreaChart>
+      {
+        LANGUAGES.map((language) => (
+          <option value={language}>
+            {
+              language
+            }
+          </option>
+        ))
+      }
+    </select>
   </div>;
 }
 

@@ -4,6 +4,7 @@ $max-width-mobile: 500px;
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
+  position: relative;
   padding: 10px;
   overflow-y: auto;
 
@@ -94,5 +95,15 @@ $max-width-mobile: 500px;
         }
       }
     }
+  }
+
+  >.charts {
+    margin-bottom: 10px;
+  }
+
+  >.select-language {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
   }
 }
