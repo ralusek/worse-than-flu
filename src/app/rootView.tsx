@@ -54,7 +54,6 @@ function RootView({
             </div>
             <input
               className='value'
-              type='number'
               value={daysToSimulate}
               onChange={(evt) => setDaysToSimulate(Number(evt.target.value))}
             />
@@ -65,7 +64,6 @@ function RootView({
             </div>
             <input
               className='value'
-              type='number'
               value={fixedProbabilityOfSpread}
               onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))}
             />
@@ -76,7 +74,6 @@ function RootView({
             </div>
             <input
               className='value'
-              type='number'
               value={fixedInterpersonalInteractions}
               onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))}
             />
