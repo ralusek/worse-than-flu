@@ -4,7 +4,9 @@ import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 // Constants
+import * as CONTROL_LABEL from 'constants/controlLabels';
 import * as SIMULATED_DAY_PROPERTY from 'constants/simulatedDayProperties';
+import * as TITLE from 'constants/titles';
 
 // Utils
 import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
@@ -44,12 +46,18 @@ function RootView({
 }: Props) {
   return <div className="RootView">
     <div className="header">
-      <div className="title">This is not the flu, ya dingus.</div>
+      <div className="title">
+        {
+          languageRef[TITLE.ROOT_VIEW].name
+        }
+      </div>
       <div className="controls-container">
         <div className="controls">
           <div className="control">
             <div className="label">
-              Days To Simulate
+              {
+                languageRef[CONTROL_LABEL.DAYS_TO_SIMULATE].name
+              }
             </div>
             <input
               className="value"
@@ -59,7 +67,9 @@ function RootView({
           </div>
           <div className="control">
             <div className="label">
-              Chance of Spreading (1 in)
+              {
+                languageRef[CONTROL_LABEL.CHANCE_OF_SPREADING].name
+              }
             </div>
             <input
               className="value"
@@ -69,7 +79,9 @@ function RootView({
           </div>
           <div className="control">
             <div className="label">
-              Number of Daily Personal Interactions
+              {
+                languageRef[CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS].name
+              }
             </div>
             <input
               className="value"
