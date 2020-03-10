@@ -9,8 +9,9 @@ import { useWindowDimensions } from './hooks';
 // Helpers
 import { getChartDimensions, getYouTubeVideoDimensions } from './helpers';
 
-// Language
-import language from 'constants/i18n';
+// Constants
+import i18nTranslations from '../constants/i18n';
+import { Language } from '../constants';
 
 // Views
 import RootView from './rootView';
@@ -32,8 +33,8 @@ function RootContainer() {
   const [fixedProbabilityOfSpread, setFixedProbabilityOfSpread] = useState(220);
   const [fixedInterpersonalInteractions, setFixedInterpersonalInteractions] = useState(12);
 
-  // TODO have this work with a dropdown to select language
-  const [languageRef, setLanguageRef] = useState(language.en);
+  const [language, setLanguage] = useState(Language.English);
+  const translations = useMemo(() => i18nTranslations[language], [language]);
 
   const simulatedDays = useMemo(() => {
     return predictThePestilentFuture({
@@ -44,7 +45,9 @@ function RootContainer() {
   }, [daysToSimulate, fixedProbabilityOfSpread, fixedInterpersonalInteractions]);
 
   return <RootView
-    languageRef={languageRef}
+    language={language}
+    setLanguage={setLanguage}
+    translations={translations}
     simulatedDays={simulatedDays}
     daysToSimulate={daysToSimulate}
     chartDimensions={chartDimensions}

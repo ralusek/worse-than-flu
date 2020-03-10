@@ -4,6 +4,7 @@ import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 // Constants
+import { Language } from '../constants';
 import * as CONTROL_LABEL from 'constants/controlLabels';
 import * as SIMULATED_DAY_PROPERTY from 'constants/simulatedDayProperties';
 import * as TITLE from 'constants/titles';
@@ -14,9 +15,13 @@ import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
 // Styles
 import './rootStyles';
 
+// Types
+import { Translation } from '../constants/i18n/types';
 
 type Props = {
-  languageRef: any;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  translations: Translation;
   simulatedDays: SimulatedDay[];
   daysToSimulate: number;
   chartDimensions: { height: number, width: number },
@@ -33,7 +38,7 @@ type Props = {
  * RootView.
  */
 function RootView({
-  languageRef,
+  translations,
   simulatedDays,
   daysToSimulate,
   chartDimensions,
@@ -48,7 +53,7 @@ function RootView({
     <div className="header">
       <div className="title">
         {
-          languageRef[TITLE.ROOT_VIEW].name
+          translations[TITLE.ROOT_VIEW].name
         }
       </div>
       <div className="controls-container">
@@ -56,7 +61,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                languageRef[CONTROL_LABEL.DAYS_TO_SIMULATE].name
+                translations[CONTROL_LABEL.DAYS_TO_SIMULATE].name
               }
             </div>
             <input
@@ -68,7 +73,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                languageRef[CONTROL_LABEL.CHANCE_OF_SPREADING].name
+                translations[CONTROL_LABEL.CHANCE_OF_SPREADING].name
               }
             </div>
             <input
@@ -80,7 +85,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                languageRef[CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS].name
+                translations[CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS].name
               }
             </div>
             <input
@@ -115,33 +120,33 @@ function RootView({
       <Area
         type="monotone"
         dataKey={SIMULATED_DAY_PROPERTY.GROWTH_FACTOR}
-        name={languageRef[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
+        name={translations[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
       />
       <Area
         type="monotone"
         dataKey={SIMULATED_DAY_PROPERTY.TOTAL_CASES}
-        name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
+        name={translations[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
         stroke="#8884d8"
         fill="#8884d8"
       />
       <Area
         type="monotone"
         dataKey={SIMULATED_DAY_PROPERTY.ACTIVE_CASES}
-        name={languageRef[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
+        name={translations[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
         stroke="#FF84d8"
         fill="#FF84d8"
       />
       <Area
         type="monotone"
         dataKey={SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES}
-        name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
+        name={translations[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
         stroke="#FF0000"
         fill="#FF0000"
       />
       <Area
         type="monotone"
         dataKey={SIMULATED_DAY_PROPERTY.NEW_CASES}
-        name={languageRef[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
+        name={translations[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
         stroke="#88FFd8"
         fill="#88FFd8"
       />
