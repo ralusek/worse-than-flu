@@ -1,6 +1,6 @@
-import * as CONTROL_LABEL from '../controlLabels';
-import * as SIMULATED_DAY_PROPERTY from '../simulatedDayProperties';
-import * as TITLE from '../titles';
+import * as CONTROL_LABEL from '../../controlLabels';
+import * as SIMULATED_DAY_PROPERTY from '../../simulatedDayProperties';
+import * as TITLE from '../../titles';
 
 export default {
   [TITLE.ROOT_VIEW]: {
