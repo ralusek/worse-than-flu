@@ -4,10 +4,10 @@ import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 // Constants
-import { Language } from '../constants';
 import * as CONTROL_LABEL from 'constants/controlLabels';
 import * as SIMULATED_DAY_PROPERTY from 'constants/simulatedDayProperties';
 import * as TITLE from 'constants/titles';
+import { Language, LANGUAGES } from '../constants';
 
 // Utils
 import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
@@ -38,6 +38,8 @@ type Props = {
  * RootView.
  */
 function RootView({
+  language,
+  setLanguage,
   translations,
   simulatedDays,
   daysToSimulate,
@@ -56,6 +58,17 @@ function RootView({
           translations[TITLE.ROOT_VIEW].name
         }
       </div>
+      <select value={language} onChange={(e) => setLanguage(e.target.value as Language)}>
+        {
+          LANGUAGES.map((language) => (
+            <option value={language}>
+              {
+                language
+              }
+            </option>
+          ))
+        }
+      </select>
       <div className="controls-container">
         <div className="controls">
           <div className="control">
