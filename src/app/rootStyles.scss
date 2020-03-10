@@ -2,8 +2,66 @@
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
+  padding: 10px;
   overflow: hidden;
 
-  .recharts-wrapper {
+  >.header {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    text-align: center;
+
+    >.title {
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+
+    >.controls-container {
+      display: flex;
+      flex: 0 1 auto;
+      justify-content: space-around;
+
+      >.controls {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        width: 50%;
+
+        >.control {
+          display: flex;
+          flex: 0 1 auto;
+          margin-bottom: 10px;
+          height: 33.3333333333%;
+          align-items: center;
+          font-size: 22px;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+
+          >.label {
+            text-align: left;
+            width: max-content;
+            margin-right: 7px;
+          }
+
+          >.value {
+            font-size: 22px;
+            width: 60px;
+            border-radius: 5px;
+            border: 1px solid green;
+            padding: 5px;
+            text-align: center;
+            outline: none;
+          }
+        }
+      }
+
+      >.video {
+        width: 50%;
+        text-align: center;
+      }
+    }
   }
 }

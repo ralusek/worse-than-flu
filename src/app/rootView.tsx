@@ -39,28 +39,56 @@ function RootView({
   fixedInterpersonalInteractions,
   setFixedInterpersonalInteractions,
 }: Props) {
-  return <div style={{marginLeft: 100}}>
-    <h4>This is not the flu, ya dingus.</h4>
-    <div>
-      <label>Days To Simulate</label>
-      <br />
-      <input value={daysToSimulate} onChange={(evt) => setDaysToSimulate(Number(evt.target.value))} />
+  return <div className='RootView'>
+    <div className='header'>
+      <div className='title'>This is not the flu, ya dingus.</div>
+      <div className='controls-container'>
+        <div className='controls'>
+          <div className='control'>
+            <div className='label'>
+              Days To Simulate
+            </div>
+            <input
+              className='value'
+              value={daysToSimulate}
+              onChange={(evt) => setDaysToSimulate(Number(evt.target.value))}
+            />
+          </div>
+          <div className='control'>
+            <div className='label'>
+              Chance of Spreading (1 in)
+            </div>
+            <input
+              className='value'
+              value={fixedProbabilityOfSpread}
+              onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))}
+            />
+          </div>
+          <div className='control'>
+            <div className='label'>
+              Number of Daily Personal Interactions
+            </div>
+            <input
+              className='value'
+              value={fixedInterpersonalInteractions}
+              onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))}
+            />
+          </div>
+        </div>
+        <div className='video'>
+          <YouTube
+            videoId='eejhwa-OzEo'
+            opts={{
+              width: '500',
+              height: '200',
+            }}
+          />
+        </div>
+      </div>
     </div>
-    <div>
-      <label>Chance of Spreading</label>
-      <br />
-      1 in <input value={fixedProbabilityOfSpread} onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))} />
-    </div>
-    <div>
-      <label>Number of Daily Personal Interactions</label>
-      <br />
-      <input value={fixedInterpersonalInteractions} onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))} />
-    </div>
-    <YouTube videoId='eejhwa-OzEo' />
-
     <AreaChart
       width={1200}
-      height={600}
+      height={400}
       data={simulatedDays}
       syncId="anyId"
       margin={{
