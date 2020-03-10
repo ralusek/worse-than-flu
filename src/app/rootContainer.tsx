@@ -15,6 +15,7 @@ import { Language } from '../constants';
 
 // Views
 import RootView from './rootView';
+import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
 
 
 /**
@@ -41,7 +42,11 @@ function RootContainer() {
       daysToSimulate,
       fixedProbabilityOfSpread: 1 / fixedProbabilityOfSpread,
       fixedInterpersonalInteractions,
-    });
+    })
+    .reduce((agg, simulatedDay, i) => {
+      if (!(i % 7)) agg.push(simulatedDay);
+      return agg;
+    }, [] as SimulatedDay[]);
   }, [daysToSimulate, fixedProbabilityOfSpread, fixedInterpersonalInteractions]);
 
   return <RootView
