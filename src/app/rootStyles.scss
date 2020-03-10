@@ -3,7 +3,7 @@
   flex: 1 1 100%;
   flex-direction: column;
   padding: 10px;
-  overflow: hidden;
+  overflow-y: auto;
 
   >.header {
     display: flex;
@@ -15,6 +15,11 @@
       font-size: 30px;
       font-weight: 500;
       margin-bottom: 30px;
+
+      @media screen and (max-width: 700px) {
+        font-size: 26px;
+        margin-bottom: 15px;
+      }
     }
 
     >.controls-container {
@@ -22,11 +27,20 @@
       flex: 0 1 auto;
       justify-content: space-around;
 
+      @media screen and (max-width: 700px) {
+        flex-direction: column-reverse;
+      }
+
       >.controls {
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
         width: 50%;
+
+        @media screen and (max-width: 700px) {
+          width: 100%;
+          margin-bottom: 20px;
+        }
 
         >.control {
           display: flex;
@@ -36,7 +50,12 @@
           align-items: center;
           font-size: 22px;
 
-          &:last-of-type {
+          @media screen and (max-width: 700px) {
+            font-size: 18px;
+            height: max-content;
+          }
+
+            &:last-of-type {
             margin-bottom: 0;
           }
 
@@ -61,6 +80,11 @@
       >.video {
         width: 50%;
         text-align: center;
+
+        @media screen and (max-width: 700px) {
+          width: 100%;
+          margin-bottom: 10px;
+        }
       }
     }
   }
