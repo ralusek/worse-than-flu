@@ -4,7 +4,7 @@ import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 // Constants
-import { GROWTH_FACTOR } from 'constants/simulatedDayProperties';
+import * as SIMULATED_DAY_PROPERTY from 'constants/simulatedDayProperties';
 
 // Utils
 import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
@@ -100,12 +100,39 @@ function RootView({
       <YAxis dataKey="totalCases" width={40} />
       <Tooltip />
       {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
-      {/* TODO convert the rest of these to i18n */}
-      <Area type="monotone" dataKey={GROWTH_FACTOR} name={languageRef[GROWTH_FACTOR].name} />
-      <Area type="monotone" dataKey="totalCases" stroke="#8884d8" fill="#8884d8" />
-      <Area type="monotone" dataKey="activeCases" stroke="#FF84d8" fill="#FF84d8" />
-      <Area type="monotone" dataKey="totalFatalities" stroke="#FF0000" fill="#FF0000" />
-      <Area type="monotone" dataKey="newCases" stroke="#88FFd8" fill="#88FFd8" />
+      <Area
+        type="monotone"
+        dataKey={SIMULATED_DAY_PROPERTY.GROWTH_FACTOR}
+        name={languageRef[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
+      />
+      <Area
+        type="monotone"
+        dataKey={SIMULATED_DAY_PROPERTY.TOTAL_CASES}
+        name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
+        stroke="#8884d8"
+        fill="#8884d8"
+      />
+      <Area
+        type="monotone"
+        dataKey={SIMULATED_DAY_PROPERTY.ACTIVE_CASES}
+        name={languageRef[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
+        stroke="#FF84d8"
+        fill="#FF84d8"
+      />
+      <Area
+        type="monotone"
+        dataKey={SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES}
+        name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
+        stroke="#FF0000"
+        fill="#FF0000"
+      />
+      <Area
+        type="monotone"
+        dataKey={SIMULATED_DAY_PROPERTY.NEW_CASES}
+        name={languageRef[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
+        stroke="#88FFd8"
+        fill="#88FFd8"
+      />
     </AreaChart>
   </div>;
 }
