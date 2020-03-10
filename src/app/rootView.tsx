@@ -1,17 +1,16 @@
 import React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import _ from 'lodash';
 import YouTube from 'react-youtube'
+import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-// Children
+// Constants
+import { GROWTH_FACTOR } from 'constants/simulatedDayProperties';
 
+// Utils
+import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
 
 // Styles
 import './rootStyles';
-import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
-import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
-import { GROWTH_FACTOR } from 'constants/simulatedDayProperties';
-
 
 
 type Props = {
@@ -43,45 +42,45 @@ function RootView({
   fixedInterpersonalInteractions,
   setFixedInterpersonalInteractions,
 }: Props) {
-  return <div className='RootView'>
-    <div className='header'>
-      <div className='title'>This is not the flu, ya dingus.</div>
-      <div className='controls-container'>
-        <div className='controls'>
-          <div className='control'>
-            <div className='label'>
+  return <div className="RootView">
+    <div className="header">
+      <div className="title">This is not the flu, ya dingus.</div>
+      <div className="controls-container">
+        <div className="controls">
+          <div className="control">
+            <div className="label">
               Days To Simulate
             </div>
             <input
-              className='value'
+              className="value"
               value={daysToSimulate}
               onChange={(evt) => setDaysToSimulate(Number(evt.target.value))}
             />
           </div>
-          <div className='control'>
-            <div className='label'>
+          <div className="control">
+            <div className="label">
               Chance of Spreading (1 in)
             </div>
             <input
-              className='value'
+              className="value"
               value={fixedProbabilityOfSpread}
               onChange={(evt) => setFixedProbabilityOfSpread(Number(evt.target.value))}
             />
           </div>
-          <div className='control'>
-            <div className='label'>
+          <div className="control">
+            <div className="label">
               Number of Daily Personal Interactions
             </div>
             <input
-              className='value'
+              className="value"
               value={fixedInterpersonalInteractions}
               onChange={(evt) => setFixedInterpersonalInteractions(Number(evt.target.value))}
             />
           </div>
         </div>
-        <div className='video'>
+        <div className="video">
           <YouTube
-            videoId='eejhwa-OzEo'
+            videoId="eejhwa-OzEo"
             opts={youtubeVideoDimensions}
           />
         </div>
