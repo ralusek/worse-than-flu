@@ -10,10 +10,10 @@ export default {
     name: 'Posibilidad De Propagarse 1 en',
   },
   [CONTROL_LABEL.DAYS_TO_SIMULATE]: {
-    name: 'Días Para Simular',
+    name: 'Días Simuladas',
   },
   [CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS]: {
-    name: 'Número De Interacciones Personales Diarias',
+    name: 'Número De Interacciones Personales Por Día',
   },
   [SIMULATED_DAY_PROPERTY.ACTIVE_CASES]: {
     name: 'Casos Activos',
@@ -34,6 +34,6 @@ export default {
     name: 'Personas',
   },
   [TITLE.DAYS]: {
-    name: 'Dias',
+    name: 'Días',
   },
 };

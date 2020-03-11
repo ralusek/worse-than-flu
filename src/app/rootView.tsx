@@ -112,13 +112,13 @@ function RootView({
                                  refreshMode='debounce'
                                  refreshRate={500}
                                  onResize={(width) => setVideoContainerWidth(width)} />
-            <YouTube
+            {/* <YouTube
               videoId="eejhwa-OzEo"
               opts={{
                 width: String(videoContainerWidth),
                 height: String(videoContainerWidth * 9 / 16),
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>
