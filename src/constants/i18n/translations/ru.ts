@@ -4,7 +4,7 @@ import * as TITLE from '../../titles';
 
 export default {
   [TITLE.ROOT_VIEW]: {
-    name: 'Это не простуда, приятель.',
+    name: 'Это не грипп, приятель.',
   },
   [CONTROL_LABEL.CHANCE_OF_SPREADING]: {
     name: 'Шанс Распространения 1 к',
@@ -31,7 +31,7 @@ export default {
     name: 'Всего Смертей',
   },
   [TITLE.PEOPLE]: {
-    name: 'Люди',
+    name: 'Людей',
   },
   [TITLE.DAYS]: {
     name: 'Дней',
