@@ -1,4 +1,4 @@
-$max-width-mobile: 500px;
+$max-width-mobile: 980px;
 
 .RootView {
   display: flex;
@@ -6,104 +6,123 @@ $max-width-mobile: 500px;
   flex-direction: column;
   position: relative;
   padding: 10px;
+  overflow-x: hidden;
   overflow-y: auto;
 
-  >.header {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    text-align: center;
+  .card {
+    padding: 24px;
+    border-bottom: solid 1px #eee;
+    // border: solid 1px #eee;
+    // box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.15);
+    margin-bottom: 5px;
+  }
 
-    >.title {
-      font-size: 30px;
-      font-weight: 500;
-      margin-bottom: 30px;
+  .content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 0 0 auto;
 
-      @media screen and (max-width: $max-width-mobile) {
-        font-size: 26px;
-        margin-bottom: 15px;
-      }
-    }
-
-    >.controls-container {
+    >.header {
       display: flex;
-      flex: 0 1 auto;
-      justify-content: space-around;
+      flex-direction: column;
+      flex: 1 1 auto;
+      text-align: center;
 
-      @media screen and (max-width: $max-width-mobile) {
-        flex-direction: column-reverse;
-      }
-
-      >.controls {
-        display: flex;
-        flex-direction: column;
-        flex: 1 1 auto;
-        width: 50%;
+      >.title {
+        font-size: 30px;
+        font-weight: 500;
 
         @media screen and (max-width: $max-width-mobile) {
-          width: 100%;
-          margin-bottom: 20px;
+          font-size: 26px;
+          margin-bottom: 15px;
+        }
+      }
+
+      >.controls-container {
+        display: flex;
+        flex: 1 0 auto;
+        justify-content: space-around;
+        overflow: hidden;
+
+        @media screen and (max-width: $max-width-mobile) {
+          flex-direction: column-reverse;
         }
 
-        >.control {
+        >.controls {
           display: flex;
-          flex: 0 1 auto;
-          margin-bottom: 10px;
-          height: 33.3333333333%;
-          align-items: center;
-          font-size: 22px;
+          flex-direction: column;
+          width: 50%;
+          overflow: hidden;
 
           @media screen and (max-width: $max-width-mobile) {
-            font-size: 18px;
-            height: max-content;
+            width: 100%;
+            margin-bottom: 20px;
           }
 
-            &:last-of-type {
-            margin-bottom: 0;
-          }
-
-          >.label {
-            text-align: left;
-            width: max-content;
-            margin-right: 7px;
-          }
-
-          >.value {
+          >.control {
+            display: flex;
+            flex: 0 1 auto;
+            margin-bottom: 10px;
             font-size: 22px;
-            width: 60px;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid green;
-            border-radius: 5px;
-            outline: none;
+            margin-right: 12px;
+            align-items: center;
 
             @media screen and (max-width: $max-width-mobile) {
               font-size: 18px;
-              padding: 2px;
+              margin-right: 0;
             }
+
+              &:last-of-type {
+              margin-bottom: 0;
             }
+
+            >.label {
+              text-align: left;
+              width: max-content;
+              margin-right: 7px;
+            }
+
+            >.value {
+              font-size: 22px;
+              width: 60px;
+              padding: 5px;
+              text-align: center;
+              border: 1px solid green;
+              border-radius: 5px;
+              outline: none;
+
+              @media screen and (max-width: $max-width-mobile) {
+                font-size: 18px;
+                padding: 2px;
+              }
+              }
+          }
         }
-      }
 
-      >.video {
-        width: 50%;
-        text-align: center;
+        >.video {
+          width: 50%;
+          text-align: center;
+          margin-left: 12px;
 
-        @media screen and (max-width: $max-width-mobile) {
-          width: 100%;
-          margin-bottom: 10px;
+          @media screen and (max-width: $max-width-mobile) {
+            width: 100%;
+            margin-bottom: 10px;
+            margin-left: 0;
+          }
         }
       }
     }
-  }
 
-  >.charts {
-    margin-bottom: 10px;
-  }
+    >.charts {
+      margin-bottom: 10px;
+    }
 
-  >.select-language {
-    position: absolute;
-    right: 2px;
-    bottom: 2px;
+    >.select-language {
+      position: fixed;
+      right: 2px;
+      bottom: 2px;
+    }
   }
 }
