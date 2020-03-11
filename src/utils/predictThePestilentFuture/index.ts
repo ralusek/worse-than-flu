@@ -43,7 +43,8 @@ export default ({
        TODO get input from experts in infectious disease to help make this take into account real
        factors that would determine how people interact with each other.
      */
-    const susceptiblePersonalInteractions = fixedInterpersonalInteractions * ( previous.healthyPopulation / totalPopulation);
+    const susceptiblePersonalInteractions = fixedInterpersonalInteractions * (previous.healthyPopulation / totalPopulation);
+    console.log('Susceptible', susceptiblePersonalInteractions, previous.healthyPopulation);
     
     /** Calculate probability of spread. TODO: get input from experts in infectious disease to help make this less arbitrary. */
     const probabilityOfSpread = fixedProbabilityOfSpread;
@@ -58,6 +59,13 @@ export default ({
 
     /** Increase total cases by new cases. */
     current.totalCases = previous.totalCases + current.newCases;
+
+    /** Account for overshooting total population in the case of aggressive exponentiation. */
+    const overshot = totalPopulation - current.totalCases;
+    if (overshot < 0) {
+      current.newCases += overshot;
+      current.totalCases += overshot;
+    }
 
     /** Calculate factors of growth. */
     current.totalIncreaseFactor = current.totalCases / previous.totalCases;
