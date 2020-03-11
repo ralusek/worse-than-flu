@@ -7,7 +7,7 @@ export default {
     name: 'This is not the flu, ya dingus.',
   },
   [CONTROL_LABEL.CHANCE_OF_SPREADING]: {
-    name: 'Chance of Spreading (1 in)',
+    name: 'Chance of Spreading 1 in',
   },
   [CONTROL_LABEL.DAYS_TO_SIMULATE]: {
     name: 'Days to Simulate',
@@ -29,5 +29,11 @@ export default {
   },
   [SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES]: {
     name: 'Total Fatalities',
-  }
+  },
+  [TITLE.PEOPLE]: {
+    name: 'People',
+  },
+  [TITLE.DAYS]: {
+    name: 'Days',
+  },
 };

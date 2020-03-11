@@ -1,5 +1,8 @@
 import React, { useMemo, useState } from 'react';
 
+// Types
+import { Language } from 'constants/i18n/types';
+
 // Data
 import predictThePestilentFuture from 'utils/predictThePestilentFuture';
 
@@ -10,8 +13,8 @@ import { useWindowDimensions } from './hooks';
 import { getChartDimensions, getYouTubeVideoDimensions } from './helpers';
 
 // Constants
-import i18nTranslations from '../constants/i18n';
-import { Language } from '../constants';
+import languageRef from '../constants/i18n/languageRef';
+import { LANGUAGE } from '../constants/i18n';
 
 // Views
 import RootView from './rootView';
@@ -34,25 +37,21 @@ function RootContainer() {
   const [fixedProbabilityOfSpread, setFixedProbabilityOfSpread] = useState(220);
   const [fixedInterpersonalInteractions, setFixedInterpersonalInteractions] = useState(12);
 
-  const [language, setLanguage] = useState(Language.English);
-  const translations = useMemo(() => i18nTranslations[language], [language]);
+  const [language, setLanguage] = useState<Language>(LANGUAGE.ENGLISH);
+  const activeLanguageRef = useMemo(() => languageRef[language], [language]);
 
   const simulatedDays = useMemo(() => {
     return predictThePestilentFuture({
       daysToSimulate,
       fixedProbabilityOfSpread: 1 / fixedProbabilityOfSpread,
       fixedInterpersonalInteractions,
-    })
-    .reduce((agg, simulatedDay, i) => {
-      if (!(i % 7)) agg.push(simulatedDay);
-      return agg;
-    }, [] as SimulatedDay[]);
+    });
   }, [daysToSimulate, fixedProbabilityOfSpread, fixedInterpersonalInteractions]);
 
   return <RootView
     language={language}
     setLanguage={setLanguage}
-    translations={translations}
+    languageRef={activeLanguageRef}
     simulatedDays={simulatedDays}
     daysToSimulate={daysToSimulate}
     chartDimensions={chartDimensions}

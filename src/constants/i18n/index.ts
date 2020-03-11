@@ -1,13 +1,12 @@
-import { Language } from '../index';
-import { Translation } from './types';
+import objectValues from 'utils/objectValues';
+import asEnum from 'utils/asEnum';
 
-import en from './translations/en';
-import ru from './translations/ru';
+export const LANGUAGE = asEnum({
+  ENGLISH: 'English',
+  RUSSIAN: 'Russian',
+  SPANISH: 'Spanish',
+});
 
-type TranslationByLanguage = { [language in Language]: Translation};
-const TRANSLATION_BY_LANGUAGE: TranslationByLanguage = {
-  [Language.English]: en,
-  [Language.Russian]: ru,
-};
+export const LANGUAGES = objectValues(LANGUAGE);
 
-export default TRANSLATION_BY_LANGUAGE;
+

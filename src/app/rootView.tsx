@@ -3,25 +3,27 @@ import YouTube from 'react-youtube'
 import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
+// Types
+import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
+import { Language, Translation } from '../constants/i18n/types';
+
 // Constants
 import * as CONTROL_LABEL from 'constants/controlLabels';
 import * as SIMULATED_DAY_PROPERTY from 'constants/simulatedDayProperties';
 import * as TITLE from 'constants/titles';
-import { Language, LANGUAGES } from '../constants';
+import { LANGUAGES } from '../constants/i18n';
 
 // Utils
-import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
+import millify from './helpers/configuredMillify';
+import tooltipFormatter from './helpers/tooltipFormatter';
 
 // Styles
 import './rootStyles';
 
-// Types
-import { Translation } from '../constants/i18n/types';
-
 type Props = {
   language: Language;
   setLanguage: (lang: Language) => void;
-  translations: Translation;
+  languageRef: Translation;
   simulatedDays: SimulatedDay[];
   daysToSimulate: number;
   chartDimensions: { height: number, width: number },
@@ -40,7 +42,7 @@ type Props = {
 function RootView({
   language,
   setLanguage,
-  translations,
+  languageRef,
   simulatedDays,
   daysToSimulate,
   chartDimensions,
@@ -55,7 +57,7 @@ function RootView({
     <div className="header">
       <div className="title">
         {
-          translations[TITLE.ROOT_VIEW].name
+          languageRef[TITLE.ROOT_VIEW].name
         }
       </div>
       <div className="controls-container">
@@ -63,7 +65,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                translations[CONTROL_LABEL.DAYS_TO_SIMULATE].name
+                languageRef[CONTROL_LABEL.DAYS_TO_SIMULATE].name
               }
             </div>
             <input
@@ -75,7 +77,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                translations[CONTROL_LABEL.CHANCE_OF_SPREADING].name
+                languageRef[CONTROL_LABEL.CHANCE_OF_SPREADING].name
               }
             </div>
             <input
@@ -87,7 +89,7 @@ function RootView({
           <div className="control">
             <div className="label">
               {
-                translations[CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS].name
+                languageRef[CONTROL_LABEL.NUMBER_OF_DAILY_PERSONAL_INTERACTIONS].name
               }
             </div>
             <input
@@ -112,44 +114,62 @@ function RootView({
         data={simulatedDays}
         syncId="anyId"
         margin={{
-          top: 10, right: 30, left: 100, bottom: 0,
+          top: 20, right: 30, left: 30, bottom: 20,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis />
-        <YAxis dataKey="totalCases" width={40} />
-        <Tooltip />
+        <XAxis
+          label={{
+            value: languageRef[TITLE.DAYS].name,
+            dy: 20
+          }} />
+        <YAxis
+          dataKey="totalCases"
+          unit={` ${languageRef[TITLE.PEOPLE].name}`}
+          tickFormatter={
+            (number) => millify(number)
+          }
+          width={150} />
+        <Tooltip
+          formatter={
+            (value, prop, { dataKey }) => {
+              const key = String(dataKey);
+              // @ts-ignore
+              return (key in tooltipFormatter) ? tooltipFormatter[key](value) : value;
+            }
+          }
+        />
         {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
         <Area
           type="monotone"
           dataKey={SIMULATED_DAY_PROPERTY.GROWTH_FACTOR}
-          name={translations[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
+          name={languageRef[SIMULATED_DAY_PROPERTY.GROWTH_FACTOR].name}
         />
         <Area
           type="monotone"
           dataKey={SIMULATED_DAY_PROPERTY.TOTAL_CASES}
-          name={translations[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
+          name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_CASES].name}
           stroke="#8884d8"
           fill="#8884d8"
         />
         <Area
           type="monotone"
           dataKey={SIMULATED_DAY_PROPERTY.ACTIVE_CASES}
-          name={translations[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
+          name={languageRef[SIMULATED_DAY_PROPERTY.ACTIVE_CASES].name}
           stroke="#FF84d8"
           fill="#FF84d8"
         />
         <Area
           type="monotone"
           dataKey={SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES}
-          name={translations[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
+          name={languageRef[SIMULATED_DAY_PROPERTY.TOTAL_FATALITIES].name}
           stroke="#FF0000"
           fill="#FF0000"
         />
         <Area
           type="monotone"
           dataKey={SIMULATED_DAY_PROPERTY.NEW_CASES}
-          name={translations[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
+          name={languageRef[SIMULATED_DAY_PROPERTY.NEW_CASES].name}
           stroke="#88FFd8"
           fill="#88FFd8"
         />
