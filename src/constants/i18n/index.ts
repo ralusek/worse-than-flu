@@ -3,8 +3,8 @@ import asEnum from 'utils/asEnum';
 
 export const LANGUAGE = asEnum({
   ENGLISH: 'English',
-  RUSSIAN: 'Russian',
-  SPANISH: 'Spanish',
+  RUSSIAN: 'Русский',
+  SPANISH: 'Español',
 });
 
 export const LANGUAGES = objectValues(LANGUAGE);
