@@ -64,9 +64,12 @@ function RootView({
     <div className="content-wrapper">
       <div className="header">
         <div className="title card">
-          {
+          <div className="header-text">{
             languageRef[TITLE.ROOT_VIEW].name
-          }
+          }</div>
+          <div className="contrib">
+            Want to help improve this tool? Please feel free at https://github.com/ralusek/worse-than-flu
+          </div>
         </div>
         <div className="controls-container card">
           <div className="controls">
@@ -112,13 +115,13 @@ function RootView({
                                  refreshMode='debounce'
                                  refreshRate={500}
                                  onResize={(width) => setVideoContainerWidth(width)} />
-            {/* <YouTube
-              videoId="eejhwa-OzEo"
+            <YouTube
+              videoId="J6h4ewePMgQ"
               opts={{
                 width: String(videoContainerWidth),
                 height: String(videoContainerWidth * 9 / 16),
               }}
-            /> */}
+            />
           </div>
         </div>
       </div>

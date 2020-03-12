@@ -31,13 +31,22 @@ $max-width-mobile: 980px;
       text-align: center;
 
       >.title {
-        font-size: 30px;
-        font-weight: 500;
 
-        @media screen and (max-width: $max-width-mobile) {
-          font-size: 26px;
-          margin-bottom: 15px;
+        .header-text {
+          font-size: 30px;
+          font-weight: 500;
+
+          @media screen and (max-width: $max-width-mobile) {
+            font-size: 26px;
+            margin-bottom: 15px;
+          }
         }
+
+        .contrib {
+          font-size: 12px;
+          margin-top: 6px;
+        }
+        
       }
 
       >.controls-container {
@@ -53,7 +62,7 @@ $max-width-mobile: 980px;
         >.controls {
           display: flex;
           flex-direction: column;
-          width: 50%;
+          width: 66%;
           overflow: hidden;
 
           @media screen and (max-width: $max-width-mobile) {
@@ -102,7 +111,7 @@ $max-width-mobile: 980px;
         }
 
         >.video {
-          width: 50%;
+          width: 33%;
           text-align: center;
           margin-left: 12px;
 
