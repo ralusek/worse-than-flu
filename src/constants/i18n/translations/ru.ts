@@ -10,7 +10,7 @@ export default {
     name: 'Шанс Распространения 1 к',
   },
   [CONTROL_LABEL.STARTING_NUMBER_OF_CASES]: {
-    name: 'Начальное Количество Дел',
+    name: 'Начальное Количество Случаев',
   },
   [CONTROL_LABEL.DAYS_TO_SIMULATE]: {
     name: 'Дней Симуляции',
