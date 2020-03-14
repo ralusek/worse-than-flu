@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import debounce from 'lodash/debounce';
 
 // Types
 import { Language } from 'constants/i18n/types';
@@ -19,10 +20,19 @@ import RootView from './rootView';
  */
 function RootContainer() {
   
-
+  const [startingNumberOfCases, setStartingNumberOfCases] = useState(150000);
   const [daysToSimulate, setDaysToSimulate] = useState(600);
   const [fixedProbabilityOfSpread, setFixedProbabilityOfSpread] = useState(220);
   const [fixedInterpersonalInteractions, setFixedInterpersonalInteractions] = useState(12);
+  const [zoomRange, setZoomRange] = useState<[number, number]>([0, 0]);
+  const [debouncedZoomRange, setDebouncedZoomRange] = useState<[number, number]>(zoomRange);
+  const setZoomRangeDebounced = useCallback(debounce((newZoomRange: [number, number]) => {
+    setDebouncedZoomRange(newZoomRange);
+  }, 500, { maxWait: 2000 }), []);
+  const setZoomRangeCombined = useCallback((newZoomRange: [number, number]) => {
+    setZoomRange(newZoomRange);
+    setZoomRangeDebounced(newZoomRange);
+  }, []);
 
   const [language, setLanguage] = useState<Language>(LANGUAGE.ENGLISH);
   const activeLanguageRef = useMemo(() => languageRef[language], [language])
@@ -37,14 +47,29 @@ function RootContainer() {
       daysToSimulate,
       fixedProbabilityOfSpread: 1 / fixedProbabilityOfSpread,
       fixedInterpersonalInteractions,
+      startingNumberOfCases,
     });
-  }, [daysToSimulate, fixedProbabilityOfSpread, fixedInterpersonalInteractions]);
+  }, [startingNumberOfCases, daysToSimulate, fixedProbabilityOfSpread, fixedInterpersonalInteractions]);
+
+  const zoomedSimulatedDays = useMemo(() => {
+    return (simulatedDays || []).slice(debouncedZoomRange[0], debouncedZoomRange[1]);
+  }, [simulatedDays, debouncedZoomRange]);
+
+  useEffect(() => {
+    setZoomRange([zoomRange[0], zoomRange[1] || simulatedDays.length]);
+    setDebouncedZoomRange([zoomRange[0], zoomRange[1] || simulatedDays.length]);
+  }, [simulatedDays.length]);
 
   return <RootView
     language={language}
     setLanguage={setLanguage}
     languageRef={activeLanguageRef}
     simulatedDays={simulatedDays}
+    zoomedSimulatedDays={zoomedSimulatedDays}
+    zoomRange={zoomRange}
+    setZoomRange={setZoomRangeCombined}
+    startingNumberOfCases={startingNumberOfCases}
+    setStartingNumberOfCases={setStartingNumberOfCases}
     daysToSimulate={daysToSimulate}
     setDaysToSimulate={setDaysToSimulate}
     fixedProbabilityOfSpread={fixedProbabilityOfSpread}

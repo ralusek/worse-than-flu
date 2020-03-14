@@ -9,6 +9,9 @@ export default {
   [CONTROL_LABEL.CHANCE_OF_SPREADING]: {
     name: 'Chance of Spreading 1 in',
   },
+  [CONTROL_LABEL.STARTING_NUMBER_OF_CASES]: {
+    name: 'Starting Number of Cases',
+  },
   [CONTROL_LABEL.DAYS_TO_SIMULATE]: {
     name: 'Days to Simulate',
   },

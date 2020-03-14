@@ -18,15 +18,17 @@ export default ({
   fixedInterpersonalInteractions = 12,
   daysToSimulate = 365,
   cfr = CFR,
+  startingNumberOfCases = 10,
 }: Partial<Props> = {} as Props): SimulatedDay[]  => {
   // Bootstrap the first day.
   const simulated: SimulatedDay[] = [{
+    day: 0,
     healthyPopulation: totalPopulation,
-    totalCases: 50000,
+    totalCases: startingNumberOfCases,
     totalIncreaseFactor: 0,
     growthFactor: 0,
-    activeCases: 50000,
-    newCases: 50000,
+    activeCases: startingNumberOfCases,
+    newCases: startingNumberOfCases,
     newFatalities: 0,
     newRecoveries: 0,
     totalFatalities: 0,
@@ -37,6 +39,9 @@ export default ({
     const previous = simulated[i - 1];
     const current = {} as SimulatedDay;
 
+    /* Add reference to day for maintaining reference when viewing slices of all days. */
+    current.day = i;
+
     /* Calculate susceptible personal interactions. we limit the fixed personal interactions
        down to the percentage of the population that is still actually susceptible to the spread.
        This is the primary factor in turning this from an exponential equation into a logistic one.
@@ -44,7 +49,6 @@ export default ({
        factors that would determine how people interact with each other.
      */
     const susceptiblePersonalInteractions = fixedInterpersonalInteractions * (previous.healthyPopulation / totalPopulation);
-    console.log('Susceptible', susceptiblePersonalInteractions, previous.healthyPopulation);
     
     /** Calculate probability of spread. TODO: get input from experts in infectious disease to help make this less arbitrary. */
     const probabilityOfSpread = fixedProbabilityOfSpread;

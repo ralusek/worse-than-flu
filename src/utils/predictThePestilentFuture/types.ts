@@ -9,9 +9,13 @@ export type Props = {
   fixedInterpersonalInteractions: number;
   /** The Case Fatality Rate with which to simulate the disease. */
   cfr: number;
+  /** Starting number of cases. */
+  startingNumberOfCases: number;
 };
 
 export type SimulatedDay = {
+  /** Reference to day. */
+  day: number;
   /** Total number of cases up until this day. */
   totalCases: number;
   /** Total factor increase between previous day's total and this day's. */

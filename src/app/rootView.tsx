@@ -1,8 +1,9 @@
 import React from 'react';
 import YouTube from 'react-youtube'
-import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area } from 'recharts';
+import { AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, Area, Legend } from 'recharts';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import ReactResizeDetector from 'react-resize-detector';
+import { Range } from 'rc-slider';
 
 // Types
 import { SimulatedDay } from 'utils/predictThePestilentFuture/types';
@@ -20,12 +21,18 @@ import tooltipFormatter from './helpers/tooltipFormatter';
 
 // Styles
 import './rootStyles';
+import 'rc-slider/assets/index.css';
 
 type Props = {
   language: Language;
   setLanguage: (lang: Language) => void;
   languageRef: Translation;
   simulatedDays: SimulatedDay[];
+  zoomedSimulatedDays: SimulatedDay[];
+  zoomRange: [number, number];
+  setZoomRange: (zoomRange: [number, number]) => void;
+  startingNumberOfCases: number;
+  setStartingNumberOfCases: (startingNumberOfCases: number) => void;
   daysToSimulate: number;
   setDaysToSimulate: (daysToSimulate: number) => void;
   fixedProbabilityOfSpread: number;
@@ -48,6 +55,11 @@ function RootView({
   setLanguage,
   languageRef,
   simulatedDays,
+  zoomedSimulatedDays,
+  zoomRange,
+  setZoomRange,
+  startingNumberOfCases,
+  setStartingNumberOfCases,
   daysToSimulate,
   setDaysToSimulate,
   fixedProbabilityOfSpread,
@@ -73,6 +85,18 @@ function RootView({
         </div>
         <div className="controls-container card">
           <div className="controls">
+            <div className="control">
+              <div className="label">
+                {
+                  languageRef[CONTROL_LABEL.STARTING_NUMBER_OF_CASES].name
+                }
+              </div>
+              <input
+                className="value"
+                value={startingNumberOfCases}
+                onChange={(evt) => setStartingNumberOfCases(Number(evt.target.value))}
+              />
+            </div>
             <div className="control">
               <div className="label">
                 {
@@ -126,6 +150,12 @@ function RootView({
         </div>
       </div>
       <div className='charts card'>
+        <Range
+          value={zoomRange}
+          min={0}
+          max={simulatedDays.length}
+          onChange={(zoomRange: [number, number]) => setZoomRange(zoomRange)}
+        />
         <ReactResizeDetector handleWidth
                              refreshMode='debounce'
                              refreshRate={500}
@@ -133,14 +163,15 @@ function RootView({
         <AreaChart
           width={chartContainerWidth}
           height={chartContainerWidth * 9 / 16}
-          data={simulatedDays}
+          data={zoomedSimulatedDays}
           syncId="anyId"
           margin={{
-            top: 20, right: 0, left: 0, bottom: 20,
+            top: 20, right: 0, left: 0, bottom: 40,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
+            dataKey="day"
             label={{
               value: languageRef[TITLE.DAYS].name,
               dy: 20
@@ -160,6 +191,11 @@ function RootView({
                 return (key in tooltipFormatter) ? tooltipFormatter[key](value) : value;
               }
             }
+          />
+          <Legend
+            wrapperStyle={{
+              bottom: 15
+            }}
           />
           {/* <Area type="monotone" dataKey="totalIncreaseFactor" /> */}
           <Area
