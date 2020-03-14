@@ -56,8 +56,10 @@ function RootContainer() {
   }, [simulatedDays, debouncedZoomRange]);
 
   useEffect(() => {
-    setZoomRange([zoomRange[0], zoomRange[1] || simulatedDays.length]);
-    setDebouncedZoomRange([zoomRange[0], zoomRange[1] || simulatedDays.length]);
+    const lower = zoomRange[0] <= simulatedDays.length ? zoomRange[0] : 0;
+    const upper = zoomRange[1] && (zoomRange[1] <= simulatedDays.length) ? zoomRange[1] : simulatedDays.length;
+    setZoomRange([lower, upper]);
+    setDebouncedZoomRange([lower, upper]);
   }, [simulatedDays.length]);
 
   return <RootView
